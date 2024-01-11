@@ -37,8 +37,9 @@ export const SeacPart2 = () => {
   }, 0);
 
   return (
-    <div className="mt-[30px] ml-[30px]">
-      <div className="text-[30px] font-bold pb-[10px]">{course.name}</div>
+    <div>
+      <p className="text-[30px] font-bold">section A</p>
+      <div className="text-[25px] font-bold pb-[10px]">{course.name}</div>
       <div>
         {course.parts.map((item) => (
           <div key={item.id}>

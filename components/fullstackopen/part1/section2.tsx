@@ -20,10 +20,10 @@ export const Section2 = () => {
     newVotes[next] += 1;
     setVotes(newVotes);
   };
-  const hasNext = next < anecdotes.length - 1;
 
   // handle next
   const handleNext = () => {
+    const hasNext = next < anecdotes.length - 1;
     if (hasNext) {
       setNext(next + 1);
     } else {
