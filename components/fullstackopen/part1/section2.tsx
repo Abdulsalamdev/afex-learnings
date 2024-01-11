@@ -12,9 +12,15 @@ export const Section2 = () => {
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
     "The only way to go fast, is to go well.",
   ];
-  const voting: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
+
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  // handleVote
+  const handleVote = () => {
+    const newVotes = [...votes];
+    newVotes[next] += 1;
+    setVotes(newVotes);
+  };
   const hasNext = next < anecdotes.length - 1;
-  const vote = voting[next];
 
   // handle next
   const handleNext = () => {
@@ -24,11 +30,12 @@ export const Section2 = () => {
       setNext(0);
     }
   };
-
-  // handle Vote
-  const handlevote = () => {
-    voting[next] += 1;
+  // function to get index of anecdote with highest vote count
+  const getHighestVoteIndex = () => {
+    const maxVote = Math.max(...votes);
+    return votes.indexOf(maxVote);
   };
+  const highestVoteIndex = getHighestVoteIndex();
 
   let anecdote = anecdotes[next];
   return (
@@ -36,14 +43,13 @@ export const Section2 = () => {
       <p className="text-[30px] font-bold pb-[20px]">section 2</p>
       <p className="text-[22px] font-bold">anecdote of the day</p>
       <p className="text-[18px] font-semibold pb-[10px]">
-        {anecdote} has {vote}
+        {anecdote} has {votes[next]}
       </p>
       <div className="flex gap-[20px] pb-[20px]">
         <button
           className="p-[10px] rounded-[5px] feed-btn bg-[whitesmoke]"
           onClick={() => {
-            handlevote();
-            console.log(voting);
+            handleVote();
           }}
         >
           Vote
@@ -52,7 +58,7 @@ export const Section2 = () => {
           className="p-[10px] rounded-[5px] feed-btn bg-[whitesmoke]"
           onClick={() => {
             handleNext();
-            console.log(vote);
+
             // console.log(next);
           }}
         >
@@ -60,6 +66,9 @@ export const Section2 = () => {
         </button>
       </div>
       <p className="text-[22px] font-bold">anecdote with the most vote</p>
+      <p>
+        {anecdotes[highestVoteIndex]} {highestVoteIndex}
+      </p>
     </div>
   );
 };
