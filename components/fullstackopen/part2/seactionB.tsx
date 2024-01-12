@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
 export const SeactionBPart2 = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas" },
+    { name: "abdulsalam" },
+  ]);
   const [newName, setNewName] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
