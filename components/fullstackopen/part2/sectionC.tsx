@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-interface notes {
+export interface notes {
   name: string;
   number: string;
   id: number;
