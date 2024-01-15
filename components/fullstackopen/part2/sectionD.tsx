@@ -6,6 +6,10 @@ type Contact = {
   number: string;
   id: number;
 };
+interface de {
+  e: any;
+  id: number;
+}
 export const SectionD = () => {
   // base URl
   const baseUrl = "http://localhost:3001/persons";
@@ -65,6 +69,30 @@ export const SectionD = () => {
   const filteredNotes = notes.filter((note) =>
     note.name.toLowerCase().includes(filterValue.toLowerCase())
   );
+  //handle edit
+  const handleEdit = (event: any) => {
+    event.preventDefault();
+    axios
+      .put(baseUrl, newNote)
+      .then((response) => {
+        setNewName(""), setNewNumber("");
+        console.log("Data edited successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error editing data:", error);
+      });
+  };
+  // handle delete
+  const handleDelete = (id: number) => {
+    axios
+      .delete(`${baseUrl}/${id}`)
+      .then((response) => {
+        console.log("Data deleted successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error deleting data:", error);
+      });
+  };
   console.log(filterValue, filteredNotes);
   return (
     <div>
@@ -149,8 +177,20 @@ export const SectionD = () => {
               {item.name} - {item.number}{" "}
             </div>
             <div className="flex items-center gap-[15px]">
-              <button className="delete-btn">delete</button>
-              <button className="edit-btn">edit</button>
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(item.id)}
+              >
+                delete
+              </button>
+              <button
+                className="edit-btn"
+                onClick={(e) => {
+                  handleEdit(e);
+                }}
+              >
+                edit
+              </button>
             </div>
           </div>
         ))}
